@@ -16,6 +16,7 @@ import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
 import uta.mav.appoint.db.command.AddAppointmentType;
 import uta.mav.appoint.db.command.AddTimeSlot;
+import uta.mav.appoint.db.command.ChangePassword;
 import uta.mav.appoint.db.command.CheckTimeSlot;
 import uta.mav.appoint.db.command.CheckUser;
 import uta.mav.appoint.db.command.CreateAdvisor;
@@ -448,5 +449,40 @@ public class RDBImpl implements DBImplInterface{
 		cmd.execute();
 		return (String)cmd.getResult().get(0);
 	}
+	
+	public int changePassword(GetSet set) throws SQLException{
+		int status = 0;
+		try{
+			SQLCmd cmd = new ChangePassword(set.getEmailAddress(), set.getStudentId(), set.getPassword());
+			cmd.execute();
+			status = (int) (cmd.getResult()).get(0);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return status;
+	}
+
+
+	@Override
+	public void invalidateUser(String emailAddress) {
+		Connection conn = this.connectDB();
+		String command = "UPDATE user SET VALIDATED=0 WHERE email=?";
+		try {
+			PreparedStatement statement = conn.prepareStatement(command);
+			statement.setString(1,emailAddress);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	
+	@Override
+	public boolean userExists(String emailAddress){
+		SQLCmd cmd = new GetUserID(emailAddress);
+		cmd.execute();
+		return cmd.getResult().get(0)==null?false:true;
+	}
+	
 }
 

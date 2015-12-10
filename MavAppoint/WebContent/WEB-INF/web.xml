@@ -39,6 +39,15 @@
       <servlet-name>LoginServlet</servlet-name>
       <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  <servlet>
+      <servlet-name>ForgotPasswordServlet</servlet-name>
+      <servlet-class>uta.mav.appoint.ForgotPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>ForgotPasswordServlet</servlet-name>
+      <url-pattern>/forgotpassword</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
       <servlet-name>CustomizeServlet</servlet-name>
       <servlet-class>uta.mav.appoint.CustomizeServlet</servlet-class>
@@ -136,5 +145,4 @@
       <servlet-class>uta.mav.appoint.AddAppointmentServlet</servlet-class>
   </servlet>
  
-  
 </web-app>

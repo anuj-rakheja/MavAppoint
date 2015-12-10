@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public abstract class SQLCmd {
 	ArrayList<Object> result = new ArrayList<Object>();
 	ResultSet res;
+	int updateRes;
 	Connection conn;
 	public ArrayList<Object> getResult(){return result;};
 	public abstract void queryDB();

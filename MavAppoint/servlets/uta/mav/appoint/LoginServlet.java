@@ -25,6 +25,10 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		session = request.getSession();
+		if(session.getAttribute("failedAttempts")==null){
+			session.setAttribute("failedAttempts",0);			
+			session.setAttribute("userFailed","temp");
+		}
 		request.getRequestDispatcher("/WEB-INF/jsp/views/login.jsp").forward(request,response);
 	}
 	
@@ -50,11 +54,27 @@ public class LoginServlet extends HttpServlet {
 			else{
 				//redirect back to login if authentication fails
 				//need to add a "invalid username or password" response
+				if(dbm.userExists(emailAddress)){
+					if(((String) session.getAttribute("userFailed")).equalsIgnoreCase(emailAddress)){
+						int attempts = (int) session.getAttribute("failedAttempts");
+						session.removeAttribute("failedAttempts");
+						session.setAttribute("failedAttempts", attempts+1);
+						if(attempts>=3){
+							dbm.invalidateUser(sets.getEmailAddress());
+						}						
+					}else{
+						session.setAttribute("userFailed", emailAddress);
+						session.setAttribute("failedAttempts", 1);
+					}
+				}else{
+					session.setAttribute("failedAttempts", 0);
+				}
 				response.sendRedirect("login");
 			}
 		}
 		catch(Exception e){
 			System.out.println(e);
+			session.setAttribute("failedAttempts", 0);
 			response.sendRedirect("login");
 		}
 	}

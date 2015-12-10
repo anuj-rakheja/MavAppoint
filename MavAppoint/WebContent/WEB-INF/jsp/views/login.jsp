@@ -19,7 +19,6 @@
 	border-radius: 50%;
 }
 </style>
-
  <div class="container" style="margin-top:40px">
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -56,6 +55,13 @@
 										</div>
 										<div class="form-group">
 											<input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+											<a href="forgotpassword"><span class="btn btn-lg btn-primary btn-block">Forgot Password</span></a>
+											<% int attempts = (Integer) session.getAttribute("failedAttempts");
+	System.out.println(attempts);
+	if(attempts>=3){
+		out.println("Your account has been locked. Please contact the system administrator.");
+	}	
+%>
 										</div>
 									</div>
 								</div>

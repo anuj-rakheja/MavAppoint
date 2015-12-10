@@ -86,5 +86,17 @@ public class DatabaseManager {
 	public String addAppointmentType(AdvisorUser user, AppointmentType at) throws SQLException{
 		return imp.addAppointmentType(user, at);
 	}
+	
+	public int changePassword(GetSet getSet) throws SQLException{
+		return imp.changePassword(getSet);
+	}
+
+	public void invalidateUser(String emailAddress) {
+		imp.invalidateUser(emailAddress);
+	}
+	
+	public boolean userExists(String emailAddress) {
+		return imp.userExists(emailAddress);
+	}
 }
 

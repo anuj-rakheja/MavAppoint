@@ -19,13 +19,12 @@
 	border-radius: 50%;
 }
 </style>
-
  <div class="container" style="margin-top:40px">
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<strong> Sign in to continue</strong>
+						<strong> Enter your Mav ID and email address to reset password</strong>
 					</div>
 					<div class="panel-body">
 						<form role="form" action="#" method="POST">
@@ -51,13 +50,13 @@
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-lock"></i>
 												</span>
-												<input type="password" class="form-control" name=password>
+												<input type="text" class="form-control" id=userid
+			 									placeholder="1000xxxxxx or 6000xxxxxx" name="userid" required="required">
 											</div>
 										</div>
 										<div class="form-group">
-											<input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
-											<input type="submit" class="btn btn-lg btn-primary btn-block" value="Forgot Password">
-										</div>
+											<input type="submit" class="btn btn-lg btn-primary btn-block" value="Reset Password">
+											</div>
 									</div>
 								</div>
 							</fieldset>
